@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "DynamicImageViewer"
 include(":app")
+include(":app")

@@ -1,0 +1,66 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="#3D005A">
+
+    <TextView
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pick A Pet"
+        android:textStyle="bold"
+        android:textSize="48sp"
+        android:textColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/streaky"
+        android:contentDescription="Displayed Image" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/buttonOrange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Streaky"
+            android:drawableBottom="@drawable/streaky_icon"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FFAA5B" />
+
+        <Button
+            android:id="@+id/buttonBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Luna"
+            android:drawableBottom="@drawable/luna_icon"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#5BAFFF" />
+
+        <Button
+            android:id="@+id/buttonGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doggo"
+            android:drawableBottom="@drawable/doggo_icon"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#5BFFAA" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

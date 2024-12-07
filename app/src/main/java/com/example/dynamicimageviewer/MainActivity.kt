@@ -1,47 +1,53 @@
-package com.example.dynamicimageviewer
+package com.example.simpleimagechanger
 
+import android.animation.ObjectAnimator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.dynamicimageviewer.ui.theme.DynamicImageViewerTheme
+import android.widget.Button
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            DynamicImageViewerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContentView(R.layout.activity_main)
+
+        // Find views by ID
+        val imageView: ImageView = findViewById(R.id.imageView)
+        val buttonRed: Button = findViewById(R.id.buttonOrange) // Streaky
+        val buttonBlue: Button = findViewById(R.id.buttonBlue) // Luna
+        val buttonGreen: Button = findViewById(R.id.buttonGreen) // Doggo
+
+        // Set click listeners
+        buttonRed.setOnClickListener {
+            crossFadeImage(imageView, R.drawable.streaky) // Replace with your streaky drawable
+        }
+
+        buttonBlue.setOnClickListener {
+            crossFadeImage(imageView, R.drawable.luna) // Replace with your luna drawable
+        }
+
+        buttonGreen.setOnClickListener {
+            crossFadeImage(imageView, R.drawable.doggo) // Replace with your doggo drawable
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    // Function for crossfading images
+    private fun crossFadeImage(imageView: ImageView, newImageRes: Int) {
+        val fadeOut = ObjectAnimator.ofFloat(imageView, "alpha", 1f, 0f).apply {
+            duration = 300 // Fade-out duration in milliseconds
+        }
+        val fadeIn = ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f).apply {
+            duration = 300 // Fade-in duration in milliseconds
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DynamicImageViewerTheme {
-        Greeting("Android")
+        fadeOut.start()
+        fadeOut.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                imageView.setImageResource(newImageRes) // Update the image resource
+                fadeIn.start()
+            }
+        })
     }
 }
